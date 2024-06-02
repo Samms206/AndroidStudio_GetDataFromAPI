@@ -1,5 +1,6 @@
 package com.example.praktikum06
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -35,15 +36,30 @@ class MainActivity : AppCompatActivity() {
                     val playerList = response.body()?.data ?: emptyList()
                     playerAdapter = PlayerAdapterRetrofit(playerList, object : PlayerAdapterRetrofit.OnItemClickCallback {
                         override fun onItemClicked(data: Player) {
-                            Toast.makeText(this@MainActivity, data.name, Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
+                                putExtra("name", data.name)
+                                putExtra("desc", data.description)
+                                putExtra("position", data.position)
+                                putExtra("goals", data.goals)
+                                putExtra("assists", data.assists)
+                                putExtra("ga", data.ga)
+                                putExtra("number", data.number)
+                                putExtra("rating", data.rating)
+                                putExtra("club_logo", data.clubLogo)
+                                putExtra("player_image", data.playerImage)
+                                putExtra("background_card", data.backgroundCard)
+                            }
+                            startActivity(intent)
                         }
                     })
                     recyclerView.adapter = playerAdapter
+                } else {
+                    Toast.makeText(this@MainActivity, "Failed to retrieve data", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<PlayerResponse>, t: Throwable) {
-                // Handle failure
+                Toast.makeText(this@MainActivity, "Failed to connect to the server", Toast.LENGTH_SHORT).show()
             }
         })
     }
