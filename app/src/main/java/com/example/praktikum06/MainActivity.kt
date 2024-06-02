@@ -2,6 +2,7 @@ package com.example.praktikum06
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,5 +63,10 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Failed to connect to the server", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    fun gotoProfile(view: View) {
+        val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+        startActivity(intent)
     }
 }

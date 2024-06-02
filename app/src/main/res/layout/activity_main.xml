@@ -58,10 +58,12 @@
                     android:textSize="16sp"/>
             </LinearLayout>
             <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_profile"
                 android:layout_width="50dp"
                 android:layout_gravity="center"
                 android:layout_height="50dp"
                 android:src="@drawable/me"
+                android:onClick="gotoProfile"
                 app:shapeAppearanceOverlay="@style/circular"/>
         </LinearLayout>
         <!--End Header-->
